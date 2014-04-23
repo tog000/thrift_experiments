@@ -15,7 +15,7 @@ $ make
 $ sudo make install
 ```
 
-Step 2: Scaffolding for Java
+Step 2: Scaffolding for Java Server/Client
 ---
 
 ```bash
@@ -78,7 +78,17 @@ Add JAR generator to Maven:
 ```
 
 Build java files :
-```
+```bash
 $ cd java/superchat
 $ mvn package
 ```
+
+Step 3: Scaffolding for Python Client
+---
+
+```bash
+$ mkdir python
+$ thrift --gen py -out python/ square.thrift
+```
+
+
