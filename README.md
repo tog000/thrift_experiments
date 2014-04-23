@@ -16,6 +16,7 @@ $ sudo make install
 ```
 
 Step 2: Scaffolding for Java
+---
 
 ```bash
 $ mkdir java
@@ -76,7 +77,7 @@ Add JAR generator to Maven:
 </build>
 ```
 
-- Build java files :
+Build java files :
 ```
 $ cd java/superchat
 $ mvn package
