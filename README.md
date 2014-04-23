@@ -91,4 +91,16 @@ $ mkdir python
 $ thrift --gen py -out python/ square.thrift
 ```
 
+Step 4: Testing
+---
+
+```bash
+# Start Server
+java -cp target/square-1.0-SNAPSHOT-jar-with-dependencies.jar main.java.com.math.MathOperationsServer 1111
+
+# Test With Clients
+java -cp target/square-1.0-SNAPSHOT-jar-with-dependencies.jar main.java.com.math.MathOperationsClient 1111 16
+python MathOperationsClient.py 1111 16
+```
+
 
