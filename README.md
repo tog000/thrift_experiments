@@ -91,16 +91,29 @@ $ mkdir python
 $ thrift --gen py -out python/ square.thrift
 ```
 
-Step 4: Testing
+Step 4: Scaffolding for Javascript Client
+```bash
+$ mkdir js
+$ thrift --gen js -out js/ square.thrift
+```
+
+
+Step 5: Testing
 ---
 
 ```bash
-# Start Server
+# Start Sockets Server
 java -cp target/square-1.0-SNAPSHOT-jar-with-dependencies.jar main.java.com.math.MathOperationsServer 1111
+
+#Start HTTP Server
+java -cp target/square-1.0-SNAPSHOT-jar-with-dependencies.jar main.java.com.math.Httpd 8088 . /thrift/mathoperations
+
 
 # Test With Clients
 java -cp target/square-1.0-SNAPSHOT-jar-with-dependencies.jar main.java.com.math.MathOperationsClient 1111 16
 python MathOperationsClient.py 1111 16
 ```
+
+
 
 

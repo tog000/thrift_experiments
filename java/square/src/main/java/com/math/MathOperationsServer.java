@@ -11,13 +11,16 @@ public class MathOperationsServer {
 	private static MathOperations.Processor<MathOperationsHandler> processor;
 	private static MathOperationsHandler handler;
 	
-	private static int port;
-	
 	public static void main(String[] args){
+		int port = 9999;
 		if(args.length==1){
 			port = Integer.valueOf(args[0]);
 		}
 		
+		new MathOperationsServer(port);
+	}
+	
+	public MathOperationsServer(int port){
 		handler = new MathOperationsHandler();
 		processor = new MathOperations.Processor<MathOperationsHandler>(handler); 
 		

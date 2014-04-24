@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<title>Thrift JS Example</title>
+
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	  <![endif]-->
+	  <style type="text/css">
+	  	body{padding:40px;}
+	  	.container{max-width:600px;}
+	  </style>
+	</head>
+
+	<body>
+
+		<div class="container">
+			<div class="header">
+				<h3 class="text-muted">Thrift Example</h3>
+			</div>
+
+			<div class="row main-form">
+				<div class="col-lg-6">
+					<h3>Square</h3>
+
+					<div class="form-group">
+						<label for="form-server">Server</label>
+						<input name="form-server" type="text" value="localhost:8088" class="form-control" id="server" placeholder="">
+					</div>
+
+					<div class="form-group">
+						<label for="form-number">Number</label>
+						<input name="form-number" type="text" class="form-control" id="number" placeholder="Number">
+					</div>
+					<div class="form-group">
+						<button type="submit" id="submit-button" class="btn btn-default">Calculate</button>
+					</div>
+					<div class="form-group">
+						<label for="form-result">Result</label>
+						<input name="form-result" disabled type="text" class="form-control" id="result">
+					</div>
+				</div>
+
+				<div class="col-lg-6">		  
+				</div>
+			</div>
+
+			<div class="footer">
+				<p>&copy; 2014</p>
+			</div>
+
+		</div> <!-- /container -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="./lib/thrift.js"></script>
+		<script src="./MathOperations.js"></script>
+		<script src="./square_types.js"></script>
+
+
+		<script type="text/javascript">
+			jQuery(function(){
+
+				jQuery("#submit-button").on('click',function(){
+				
+					var transport = new Thrift.Transport("http://"+jQuery("#server").val()+"/thrift/mathoperations/");
+					var protocol  = new Thrift.Protocol(transport);
+					var client    = new MathOperationsClient(protocol);
+
+					jQuery(this).text("Calculating...")
+
+					try {
+						result = client.square(jQuery('#number').val());
+						jQuery('#result').val(result);
+						jQuery('#result').parent().addClass("has-success");
+						jQuery('#result').parent().removeClass("has-error");
+					} catch(ouch){
+						jQuery('#result').val(ouch.why);
+						jQuery('#result').parent().removeClass("has-success");
+						jQuery('#result').parent().addClass("has-error");
+					}
+					jQuery(this).text("Calculate")
+
+				})
+			})
+		</script>
+
+	</body>
+	</html>
