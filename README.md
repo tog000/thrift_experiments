@@ -91,6 +91,8 @@ $ mkdir python
 $ thrift --gen py -out python/ square.thrift
 ```
 
+Remember to edit file `python/square/MathOperationsClient.py` to point to your local Thrift copy (or global, if you installed Thrift using `setup.py`)
+
 Step 4: Scaffolding for Javascript Client
 ---
 
@@ -98,6 +100,8 @@ Step 4: Scaffolding for Javascript Client
 $ mkdir js
 $ thrift --gen js -out js/ square.thrift
 ```
+
+The file `js/lib/thrift.js` was copied from `$THRIFT_HOME/lib/js/src/thrift.js`
 
 Step 5: Testing
 ---
@@ -112,7 +116,10 @@ java -cp target/square-1.0-SNAPSHOT-jar-with-dependencies.jar main.java.com.math
 
 # Test With Clients
 java -cp target/square-1.0-SNAPSHOT-jar-with-dependencies.jar main.java.com.math.MathOperationsClient 1111 16
+
 python MathOperationsClient.py 1111 16
+
+http://localhost/
 ```
 
 

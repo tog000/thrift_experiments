@@ -81,8 +81,11 @@
 				jQuery("#server").val(window.location.hostname);
 
 				jQuery("#submit-button").on('click',function(){
-				
-					var transport = new Thrift.Transport("http://"+jQuery("#server").val()+":"+jQuery("#port").val()+"/thrift/mathoperations/");
+					
+					var hostname = jQuery("#server").val();
+					var port = jQuery("#port").val();
+
+					var transport = new Thrift.Transport("http://"+hostname+":"+port+"/thrift/mathoperations/");
 					var protocol  = new Thrift.Protocol(transport);
 					var client    = new MathOperationsClient(protocol);
 
