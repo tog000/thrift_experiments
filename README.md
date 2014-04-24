@@ -92,11 +92,12 @@ $ thrift --gen py -out python/ square.thrift
 ```
 
 Step 4: Scaffolding for Javascript Client
+---
+
 ```bash
 $ mkdir js
 $ thrift --gen js -out js/ square.thrift
 ```
-
 
 Step 5: Testing
 ---

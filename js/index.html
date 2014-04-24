@@ -36,8 +36,13 @@
 
 					<div class="form-group">
 						<label for="form-server">Server</label>
-						<input name="form-server" type="text" value="localhost:8088" class="form-control" id="server" placeholder="">
+						<input name="form-server" type="text" value="" class="form-control" id="server" placeholder="">
 					</div>
+					<div class="form-group">
+						<label for="form-port">Port</label>
+						<input name="form-port" type="text" value="8088" class="form-control" id="port" placeholder="">
+					</div>
+					
 
 					<div class="form-group">
 						<label for="form-number">Number</label>
@@ -72,9 +77,12 @@
 		<script type="text/javascript">
 			jQuery(function(){
 
+
+				jQuery("#server").val(window.location.hostname);
+
 				jQuery("#submit-button").on('click',function(){
 				
-					var transport = new Thrift.Transport("http://"+jQuery("#server").val()+"/thrift/mathoperations/");
+					var transport = new Thrift.Transport("http://"+jQuery("#server").val()+":"+jQuery("#port").val()+"/thrift/mathoperations/");
 					var protocol  = new Thrift.Protocol(transport);
 					var client    = new MathOperationsClient(protocol);
 
